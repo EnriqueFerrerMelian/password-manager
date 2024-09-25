@@ -1,4 +1,6 @@
-#Password Manager App
+## Password Manager App
+
+![Desktop2024 09 25-14 45 11 01-ezgif com-crop](https://github.com/user-attachments/assets/c4271d20-9ae2-4002-b10e-a63916110ae1)
 
 ## Description
 Password Manager App is a mobile application designed to help users manage their passwords securely. It allows you to store, search and copy passwords associated with different platforms, ensuring that access to your accounts is easy and secure.
