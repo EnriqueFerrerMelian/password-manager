@@ -7,7 +7,7 @@ public class DatabaseClient {
     private final AppDatabase appDatabase;
 
     private DatabaseClient(Context context) {
-        // Crear la instancia de la base de datos
+        // Create instance of the database
         appDatabase = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "UserPasswordDatabase").build();
     }
 
