@@ -48,4 +48,15 @@ public class UserPassword {
     public void setPlatform(String platform) {
         this.platform = platform;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "UserPassword{" +
+                "id=" + id +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", platform='" + platform + '\'' +
+                '}';
+    }
 }

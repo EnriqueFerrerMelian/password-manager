@@ -16,10 +16,6 @@ public interface UserPasswordDAO {
     @Query("SELECT * FROM user_passwords WHERE account = :account LIMIT 1")
     UserPassword getPasswordForAccount(String account);
 
-    // Get password for a specific platform
-    //@Query("SELECT account, password FROM user_passwords WHERE platform = :platform LIMIT 1")
-    //UserPassword getAccountsFromPlatform(String platform);
-
     // Get all data
     @Query("SELECT * FROM user_passwords")
     List<UserPassword> getAllUserPasswords();

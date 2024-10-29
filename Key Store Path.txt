@@ -1,0 +1,7 @@
+Path: C:\Users\aferr\OneDrive\Documents\Proyectos\Passwordmanager\Keystore.jks
+Password: passmanager!123
+key
+--------------------------------------------------------------------------------
+Alias: Progranauta
+Password: progra!passmanager!123
+Organización: Progranauta SL

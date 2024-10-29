@@ -2,8 +2,8 @@
     <string name="app_name">Password-manager</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="platform">Platform</string>
-    <string name="account">Account</string>
+    <string name="platform">Google, Facebook, …</string>
+    <string name="account">myemail@gmail.com</string>
     <string name="password">Password</string>
     <string name="generate_password">Generate password</string>
     <string name="include_special_characters">Include special characters</string>
@@ -11,14 +11,19 @@
     <string name="button_to_save_password">Button to save password</string>
     <string name="button_to_list_passwords">Button to list passwords</string>
     <string name="search">Search</string>
-    <string name="write_gmail">write Gmail..</string>
+    <string name="write_gmail">Search by platform name</string>
     <string name="order_by">Order By:</string>
     <string name="copy_password">Copy password</string>
     <string name="user">User</string>
     <string name="enter">Enter</string>
+    <string name="source">Source</string>
+    <string name="semicolom">:</string>
+    <string name="accountTv">Account:</string>
+    <string name="hifonTv">-</string>
+    <string name="passwordTv">Password</string>
     <string-array name="sort_options">
+        <item>Show all</item>
         <item>Platform</item>
         <item>Account</item>
-        <!--<item>ID</item>-->
     </string-array>
 </resources>
