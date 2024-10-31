@@ -1,12 +1,15 @@
 package com.example.password_manager.fragments;
 
+import static android.content.Context.MODE_PRIVATE;
 import static android.icu.lang.UProperty.LOWERCASE;
 import static androidx.core.content.ContextCompat.getSystemService;
 import static java.util.FormattableFlags.UPPERCASE;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,6 +33,9 @@ import java.util.concurrent.Executors;
 
 public class SaveFragment extends Fragment {
     private static FragmentSaveBinding binding;
+    SharedPreferences sharedPreferences;
+    private static final String SP_NAME= "credentials";
+    private static final String HELPMESSAGE1 = "helpmessage1";
     private static final String UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
     private static final String NUMBERS = "0123456789";
@@ -49,6 +55,12 @@ public class SaveFragment extends Fragment {
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        sharedPreferences = requireActivity().getSharedPreferences(SP_NAME,MODE_PRIVATE);
+        boolean helpMess1= sharedPreferences.getBoolean(HELPMESSAGE1, true);
+        if(!helpMess1){
+            binding.helpMessageCard1.setVisibility(View.GONE);
+        }
+        helpAssistant();
         binding.copyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,6 +104,9 @@ public class SaveFragment extends Fragment {
                     .userPasswordDao().insert(userPassword);
             requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(), "Item saved", Toast.LENGTH_SHORT).show());
         });
+        binding.platform.setText("");
+        binding.account.setText("");
+        binding.password.setText("");
     }
     // Method to create a random password
     private static String generatePassword(boolean includeSpecial) {
@@ -115,5 +130,44 @@ public class SaveFragment extends Fragment {
         ClipData clip = ClipData.newPlainText("Contraseña", password);
         clipboard.setPrimaryClip(clip);
         writeToast("copied to clipboard", requireContext());
+    }
+
+    public void helpAssistant(){
+
+        androidx.cardview.widget.CardView[] helpCards = {
+                binding.helpMessageCard1,
+                binding.helpMessageCard2,
+                binding.helpMessageCard3,
+                binding.helpMessageCard4,
+                binding.helpMessageCard5
+        };
+
+        android.widget.ImageButton[] closeButtons = {
+                binding.closeHelpButton1,
+                binding.closeHelpButton2,
+                binding.closeHelpButton3,
+                binding.closeHelpButton4,
+                binding.closeHelpButton5
+        };
+
+        for (int i = 0; i < closeButtons.length; i++) {
+            final int index = i;
+
+            closeButtons[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    helpCards[index].setVisibility(View.GONE);
+                    saveSettings();
+                    if (index + 1 < helpCards.length) {
+                        helpCards[index + 1].setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+        }
+    }
+    public void saveSettings(){
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(HELPMESSAGE1, false);
+        editor.apply();
     }
 }

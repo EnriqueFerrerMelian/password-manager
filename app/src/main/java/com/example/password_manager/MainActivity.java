@@ -37,18 +37,21 @@ public class MainActivity extends AppCompatActivity {
     private static final String SP_NAME= "credentials";
     private static final String USER_KEY= "user_key";
     private static final String PASSWORD_KEY= "password_key";
+    private static final String HELPMESSAGE = "helpmessage";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
         sharedPreferences = getSharedPreferences(SP_NAME,MODE_PRIVATE);
         String user = sharedPreferences.getString(USER_KEY, null);
         String password = sharedPreferences.getString(PASSWORD_KEY, null);
+        boolean helpMess= sharedPreferences.getBoolean(HELPMESSAGE, true);
+        if(!helpMess){
+            binding.helpMessageCard.setVisibility(View.GONE);
+        }
+        setContentView(binding.getRoot());
 
-        //deleteDatabase("UserPasswordDatabase");
-        //replaceFragment(new SaveFragment());
         binding.enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +73,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+        binding.closeHelpButton.setOnClickListener(v->{
+            closeHelpMessage();
+            binding.helpMessageCard.setVisibility(View.GONE);
+        });
 
     }
     public static void writeToast(String texto, Context context){
@@ -96,5 +102,10 @@ public class MainActivity extends AppCompatActivity {
         editor.putString(PASSWORD_KEY, binding.password.getText().toString());
         editor.commit();
         writeToast("Welcome " + user, context);
+    }
+    public void closeHelpMessage(){
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(HELPMESSAGE, false);
+        editor.commit();
     }
 }

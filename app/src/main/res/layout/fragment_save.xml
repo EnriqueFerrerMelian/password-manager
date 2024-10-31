@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragments.SaveFragment">
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_margin="10dp"
         android:id="@+id/platformLayout"
@@ -22,6 +23,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/helpMessageCard1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#CACACA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageButton
+            android:id="@+id/closeHelpButton1"
+            android:layout_width="48dp"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_close"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Introduce la plataforma en el primer espacio."
+            android:textSize="18sp"
+            android:layout_margin="5dp"
+            android:padding="25dp"
+            android:textStyle="bold"/>
+    </androidx.cardview.widget.CardView>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_margin="10dp"
         android:id="@+id/accountLayout"
@@ -37,6 +60,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/helpMessageCard2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#CACACA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone">
+        <ImageButton
+            android:id="@+id/closeHelpButton2"
+            android:layout_width="48dp"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_close"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Aquí va el nombre de tu cuenta (ya sea una palabra o un email)."
+            android:textSize="18sp"
+            android:layout_margin="5dp"
+            android:padding="25dp"
+            android:textStyle="bold"/>
+    </androidx.cardview.widget.CardView>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_margin="10dp"
         android:id="@+id/passwordLayout"
@@ -52,6 +98,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/helpMessageCard3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#CACACA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone">
+        <ImageButton
+            android:id="@+id/closeHelpButton3"
+            android:layout_width="48dp"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_close"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Aquí introduce la contraseña."
+            android:textSize="18sp"
+            android:layout_margin="5dp"
+            android:padding="25dp"
+            android:textStyle="bold"/>
+    </androidx.cardview.widget.CardView>
         <Button
             android:id="@+id/copyButton"
             android:layout_margin="10dp"
@@ -60,6 +129,7 @@
             android:backgroundTint="#242424"
             android:text="@string/copy_password"
             app:cornerRadius="10dp"/>
+
         <Button
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
@@ -79,7 +149,29 @@
             android:layout_height="wrap_content"
             android:text="@string/include_special_characters"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
-
+    <androidx.cardview.widget.CardView
+        android:id="@+id/helpMessageCard4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#CACACA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone">
+        <ImageButton
+            android:id="@+id/closeHelpButton4"
+            android:layout_width="48dp"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_close"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Genera una contraseña aleatoria, con o sin caracteres especiales!"
+            android:textSize="18sp"
+            android:layout_margin="5dp"
+            android:padding="25dp"
+            android:textStyle="bold"/>
+    </androidx.cardview.widget.CardView>
         <Button
             android:layout_margin="10dp"
             android:id="@+id/save_button"
@@ -88,4 +180,27 @@
             android:backgroundTint="#242424"
             android:text="@string/save"
             app:cornerRadius="10dp" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/helpMessageCard5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#CACACA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone">
+        <ImageButton
+            android:id="@+id/closeHelpButton5"
+            android:layout_width="48dp"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_close"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Guarda tus datos"
+            android:textSize="18sp"
+            android:layout_margin="5dp"
+            android:padding="25dp"
+            android:textStyle="bold"/>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
