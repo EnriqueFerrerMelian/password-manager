@@ -34,7 +34,7 @@ import java.util.concurrent.Executors;
 
 public class SaveFragment extends Fragment {
     private int selectedIconResId;
-    private static FragmentSaveBinding binding;
+    private FragmentSaveBinding binding;
     SharedPreferences sharedPreferences;
     private static final String SP_NAME= "credentials";
     private static final String HELPMESSAGE1 = "helpmessage1";
@@ -78,6 +78,7 @@ public class SaveFragment extends Fragment {
 
         // Valor inicial
         selectedIconResId = iconResIds[0];
+
         binding.iconSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -99,13 +100,22 @@ public class SaveFragment extends Fragment {
         binding.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Objects.requireNonNull(binding.platform.getText()).toString().isEmpty() ||
-                        Objects.requireNonNull(binding.account.getText()).toString().isEmpty() ||
-                        Objects.requireNonNull(binding.password.getText()).toString().isEmpty()) {
-                    writeToast("No puede estar en blanco", requireContext());
-                } else {
-                    savePassword(binding.account.getText().toString(), binding.password.getText().toString(), binding.platform.getText().toString().toUpperCase(), selectedIconResId);
+                String accountText = binding.account.getText() != null ? binding.account.getText().toString() : "";
+                String passwordText = binding.password.getText() != null ? binding.password.getText().toString() : "";
+                String platformText = binding.platform.getText() != null ? binding.platform.getText().toString() : "";
+                String notaText = binding.nota.getText() != null ? binding.nota.getText().toString() : "";
+
+                if (platformText.isEmpty() || accountText.isEmpty() || passwordText.isEmpty()) {
+                    writeToast("Ningún espacio obligatorio puede estar vacío.", requireContext());
+                    return;
                 }
+                UserPassword userPassword = new UserPassword(
+                        accountText,
+                        passwordText,
+                        platformText,
+                        selectedIconResId);
+                userPassword.setNotas(notaText);
+                savePassword(userPassword);
             }
         });
         binding.generateButton.setOnClickListener(new View.OnClickListener() {
@@ -164,9 +174,8 @@ public class SaveFragment extends Fragment {
         Toast.makeText(context, texto, Toast.LENGTH_LONG).show();
     }
 
-    private void savePassword(String account, String password, String platform, int icon) {
+    private void savePassword(UserPassword userPassword) {
         Executors.newSingleThreadExecutor().execute(() -> {
-            UserPassword userPassword = new UserPassword(account, password, platform);
             DatabaseClient.getInstance(requireContext()).getAppDatabase()
                     .userPasswordDao().insert(userPassword);
             requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(), "Guardado!", Toast.LENGTH_SHORT).show());
@@ -174,6 +183,8 @@ public class SaveFragment extends Fragment {
         binding.platform.setText("");
         binding.account.setText("");
         binding.password.setText("");
+        binding.nota.setText("");
+        System.out.println(userPassword);
     }
 
     private static String generatePassword(boolean includeSpecial) {

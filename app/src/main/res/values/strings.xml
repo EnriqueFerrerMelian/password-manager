@@ -8,9 +8,9 @@
     <string name="incluir_caracteres_especiales">Incluir caracteres especiales</string>
     <string name="gerenar_password">Gerenar password</string>
     <string name="copiar_password">Copiar password</string>
-    <string name="contrase_a">Contraseña</string>
-    <string name="account">Cuenta</string>
-    <string name="platform">Plataforma</string>
+    <string name="contrase_a">Contraseña*</string>
+    <string name="account">Cuenta*</string>
+    <string name="platform">Plataforma*</string>
     <string-array name="sort_options">
         <item>Show all</item>
         <item>Platform</item>

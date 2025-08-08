@@ -113,6 +113,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_margin="10dp"
+        android:id="@+id/notaLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nota de 20 caracteres"
+        app:endIconMode="password_toggle"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nota"
+            android:inputType="textShortMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="20"/>
+    </com.google.android.material.textfield.TextInputLayout>
     <androidx.cardview.widget.CardView
         android:id="@+id/helpMessageCard3"
         android:layout_width="wrap_content"
@@ -136,6 +152,12 @@
             android:padding="25dp"
             android:textStyle="bold"/>
     </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Campo obligatorio *"
+        android:padding="10dp"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/copyButton"
         android:layout_margin="10dp"

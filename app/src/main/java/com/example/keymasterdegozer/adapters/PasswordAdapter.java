@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.example.keymasterdegozer.R;
 import com.example.keymasterdegozer.database.DatabaseClient;
 import com.example.keymasterdegozer.database.UserPassword;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -46,26 +48,8 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.Passwo
         holder.account.setText(userPassword.getAccount());
         holder.source.setText(userPassword.getPlatform());
         holder.password.setText(userPassword.getPassword());
-        String platform = userPassword.getPlatform().toLowerCase();
-        switch (platform) {
-            case "facebook":
-                holder.platformIcon.setImageResource(R.drawable.ic_facebook);
-                break;
-            case "google":
-                holder.platformIcon.setImageResource(R.drawable.ic_google);
-                break;
-            case "tumblr":
-                holder.platformIcon.setImageResource(R.drawable.ic_tumblr);
-                break;
-            case "outlook":
-                holder.platformIcon.setImageResource(R.drawable.ic_outlook);
-                break;
-            case "trello":
-                holder.platformIcon.setImageResource(R.drawable.ic_trello);
-                break;
-            default:
-                holder.platformIcon.setImageResource(R.drawable.ic_platform);
-        }
+        holder.platformIcon.setImageResource(userPassword.getIconInt());
+        holder.nota.setText(userPassword.getNotas());
         holder.btnEdit.setOnClickListener(v -> {
             UserPassword item = passwordList.get(holder.getAdapterPosition());
 
@@ -76,21 +60,42 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.Passwo
 
             EditText inputPlatform = new EditText(context);
             inputPlatform.setHint("Plataforma");
-            inputPlatform.setText(item.platform);
+            inputPlatform.setText(item.getPlatform());
             layout.addView(inputPlatform);
 
             EditText inputAccount = new EditText(context);
             inputAccount.setHint("Cuenta");
-            inputAccount.setText(item.account);
+            inputAccount.setText(item.getAccount());
             layout.addView(inputAccount);
 
             EditText inputPassword = new EditText(context);
             inputPassword.setHint("Nueva contraseña");
-            inputPassword.setText(item.password);
+            inputPassword.setText(item.getPassword());
             layout.addView(inputPassword);
 
+            Spinner iconSpinner = new Spinner(context);
+            List<Integer> iconList = Arrays.asList(
+                    R.drawable.ic_google,
+                    R.drawable.ic_facebook,
+                    R.drawable.ic_server,
+                    R.drawable.ic_platform,
+                    R.drawable.ic_outlook,
+                    R.drawable.ic_tumblr,
+                    R.drawable.ic_trello
+            );
+            Integer[] miArray = iconList.toArray(new Integer[0]);
+            IconSpinnerAdapter spinnerAdapter = new IconSpinnerAdapter(context, miArray);
+            iconSpinner.setAdapter(spinnerAdapter);
 
-// Construir el diálogo
+            // Preseleccionar el icono actual
+            int selectedIndex = iconList.indexOf(item.getIconInt());
+            if (selectedIndex != -1) {
+                iconSpinner.setSelection(selectedIndex);
+            }
+
+            layout.addView(iconSpinner);
+
+            // Construir el diálogo
             new AlertDialog.Builder(context)
                     .setTitle("Editar registro")
                     .setView(layout)
@@ -98,11 +103,13 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.Passwo
                         String newPlatform = inputPlatform.getText().toString().trim();
                         String newAccount = inputAccount.getText().toString().trim();
                         String newPassword = inputPassword.getText().toString().trim();
+                        int selectedIconResId = (Integer) iconSpinner.getSelectedItem();
 
                         if (!newPassword.isEmpty() && !newAccount.isEmpty()) {
-                            item.platform = newPlatform;
-                            item.account = newAccount;
-                            item.password = newPassword;
+                            item.setPlatform(newPlatform);
+                            item.setAccount(newAccount);
+                            item.setPassword(newPassword);
+                            item.setIconInt(selectedIconResId);
 
                             Executors.newSingleThreadExecutor().execute(() -> {
                                 DatabaseClient.getInstance(context)
@@ -148,6 +155,7 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.Passwo
         TextView account;
         TextView source;
         TextView password;
+        TextView nota;
         ImageButton btnEdit;
         ImageButton btnDelete;
         ImageView platformIcon;
@@ -158,6 +166,7 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.Passwo
             source = itemView.findViewById(R.id.source);
             password = itemView.findViewById(R.id.password);
             platformIcon = itemView.findViewById(R.id.platformIcon);
+            nota = itemView.findViewById(R.id.nota);
             btnEdit = itemView.findViewById(R.id.btnEdit);
             btnDelete = itemView.findViewById(R.id.btnDelete);
         }

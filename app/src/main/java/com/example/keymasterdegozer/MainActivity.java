@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        replaceFragment(new SaveFragment());
+        replaceFragment(new ListFragment());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
