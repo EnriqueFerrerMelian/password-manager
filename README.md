@@ -23,6 +23,7 @@
 - 🗑️ Elimina registros con confirmación.
 - 🔍 Ordena por plataforma o cuenta.
 - 🎨 Interfaz adaptada con íconos por plataforma y navegación por `BottomNavigationView`.
+- Importa y exporta claves a tus compañeros de trabajo.
 
 ---
 
@@ -53,7 +54,6 @@
 ## 🧠 Posibles mejoras futuras
 
 - Encriptación de contraseñas con Android Keystore.
-- Exportar/importar contraseñas en JSON o CSV.
 - Protección por PIN o biometría.
 - Sincronización en la nube.
 
